@@ -1,0 +1,10 @@
+mozna udelat zanoreni typu
+raw-profiles -> camera -> lens -> profiles
+
+pro jeden fotak vice objektivu
+pro objektiv vice profilu (odsumeni, saturace, atd)
+
+pri startu by projel fotky
+a detekoval camera, detekoval lens
+a dal na vyber profiles
+
