@@ -1,0 +1,10 @@
+Kombinace Canon 1100D + Tamron AF 70-300mm ... je nestastna.
+
+1) nektere fotky nesou informaci o objektivu Tamron,
+	ale Darktable je nezpracuje, protoze ma spatny profil -> resi soubor slr-tamron.xml
+
+2) nektere fotky nenesou informaci o objektivu Tamron,
+	Darktable je zpracovava jako Sigma (nechapu proc) -> resi soubor slr-sigma.xml
+
+Oba soubory patri do /usr/share/lensfun/.
+
