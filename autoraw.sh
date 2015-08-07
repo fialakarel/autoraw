@@ -5,7 +5,9 @@
 
 profile="default"
 
-all="`ls -1 *.CR2 | wc -l`"
+raw_files="*.CR2 *.ARW"
+
+all="`ls -1 $raw_files 2>/dev/null | wc -l`"
 
 
 if [[ ! $# -eq 0 ]]
@@ -17,13 +19,15 @@ fi
 printf "\n\n"
 
 num="1"
-for photo in `ls -1 *.CR2`
+for photo in `ls -1 $raw_files 2>/dev/null`
 do
 
     printf "Analyzing photo $num/$all\r"
-    info="`exiftool $photo | grep -E "(Camera Model Name|Lens Model)" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
-    camera="`echo "$info" | head -n 1`"
-    lens="`echo "$info" | tail -n 1`"
+    #info="`exiftool $photo | grep -E "(Camera Model Name|Lens Model)" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
+    #camera="`echo "$info" | head -n 1`"
+    #lens="`echo "$info" | tail -n 1`"
+    camera="`exiftool $photo | grep -E "Camera Model Name" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
+    lens="`exiftool $photo | grep -E "Lens Model" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
     
     rp_dir="$( dirname "${BASH_SOURCE[0]}" )/raw-profiles/$camera/$lens"
     
@@ -39,15 +43,17 @@ printf "Analyzing done              \n"
 
 num="1"
 
-for photo in `ls -1 *.CR2`
+for photo in `ls -1 $raw_files 2>/dev/null`
 do
 
     # check format -- camera model, lens model
     # to use right raw profile
     printf "Processing photo $num/$all\r"
-    info="`exiftool $photo | grep -E "(Camera Model Name|Lens Model)" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
-    camera="`echo "$info" | head -n 1`"
-    lens="`echo "$info" | tail -n 1`"
+    #info="`exiftool $photo | grep -E "(Camera Model Name|Lens Model)" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
+    #camera="`echo "$info" | head -n 1`"
+    #lens="`echo "$info" | tail -n 1`"
+    camera="`exiftool $photo | grep -E "Camera Model Name" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
+    lens="`exiftool $photo | grep -E "Lens Model" | cut -d":" -f 2 | sed "s/ //g;s/f\/.*//g"`"
     
     rp="$( dirname "${BASH_SOURCE[0]}" )/raw-profiles/$camera/$lens/$profile.xmp"
     
